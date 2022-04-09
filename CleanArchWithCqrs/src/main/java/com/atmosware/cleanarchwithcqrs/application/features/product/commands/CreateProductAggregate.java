@@ -9,29 +9,28 @@ import org.springframework.beans.BeanUtils;
 
 @Aggregate
 public class CreateProductAggregate {
-	
+
 	@AggregateIdentifier
 	private String productId;
-	
+
 	private String productName;
 
 	private double price;
-
 	private String description;
-	
+
 	public CreateProductAggregate() {
-		
+
 	}
-	
+
 	@CommandHandler
 	public CreateProductAggregate(CreateProductCommand command) {
 		ProductCreatedEvent productCreatedEvent = new ProductCreatedEvent();
-		
+
 		BeanUtils.copyProperties(command, productCreatedEvent);
-		
+
 		AggregateLifecycle.apply(productCreatedEvent);
 	}
-	
+
 	@EventSourcingHandler
 	public void on(ProductCreatedEvent productCreatedEvent) {
 		this.productId = productCreatedEvent.getProductId();
