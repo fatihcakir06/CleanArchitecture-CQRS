@@ -1,4 +1,4 @@
-package com.atmosware.cleanarchwithcqrs.application.features.account.commands;
+package com.atmosware.cleanarchwithcqrs.application.features.account.commands.create;
 
 import lombok.Data;
 
